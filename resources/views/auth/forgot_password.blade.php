@@ -18,7 +18,7 @@
             <form method="POST" action="{{ route('forgot.password.act') }}" class="needs-validation" novalidate>
                 @csrf
                 <div class="form-group">
-                    <label for="credential">Nomor HP atau Email</label>
+                    <label for="credential">Email</label>
                     <input id="credential" type="text" class="form-control @error('credential') is-invalid @enderror" name="credential" value="{{ old('credential') }}" tabindex="1" >
                     @error('credential')
                         <div class="invalid-feedback">

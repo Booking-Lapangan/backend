@@ -31,12 +31,3 @@ Route::post('/forgot-password-act', [AuthController::class, 'forgot_password_act
 
 Route::get('/validasi-forgot-password/{otp}', [AuthController::class, 'validasi_forgot_password'])->name('validasi.forgot.password');
 Route::post('/validasi-forgot-password-act', [AuthController::class, 'validasi_forgot_password_act'])->name('validasi.forgot.password.act');
-
-// // Route untuk menampilkan form validasi OTP
-// Route::get('/validasi-forgot-password/{otp}', [AuthController::class, 'validasi_forgot_password'])->name('validasi.forgot.password');
-
-// // Route untuk menangani form validasi OTP
-// Route::post('/validasi-forgot-password-act', [AuthController::class, 'validasi_forgot_password_act'])->name('validasi.forgot.password.act');
-
-// Route untuk menangani form reset password
-Route::post('/password/update', [AuthController::class, 'update_password'])->name('password.update');
