@@ -1,8 +1,10 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\Backend\DashboardController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Backend\MasterController;
+use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\FasilitasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,3 +42,24 @@ Route::post('/validasi-forgot-password-act', [AuthController::class, 'validasi_f
 
 // Route untuk menangani form reset password
 Route::post('/password/update', [AuthController::class, 'update_password'])->name('password.update');
+
+//Route Dashboard
+Route::prefix('admin')->middleware('auth')->group(function(){
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    //Master
+    Route::get('/master', [MasterController::class, 'index'])->name('master');
+
+    //FAsilitas
+    Route::get('/fasilitas', [FasilitasController::class, 'index'])->name('fasilitas.index');
+        //create fasilitas
+    Route::get('/fasilitas/create', [FasilitasController::class, 'create'])->name('fasilitas.create');
+    Route::post('/fasilitas/create/process', [FasilitasController::class, 'store'])->name('fasilitas.create.process');
+        //show fasilitas
+    Route::get('/fasilitas/{id}', [FasilitasController::class, 'show'])->name('fasilitas.show');
+        //edit fasilitas
+    Route::get('/fasilitas/edit/{id}', [FasilitasController::class, 'edit'])->name('fasilitas.edit');
+    Route::put('/fasilitas/update/{id}', [FasilitasController::class, 'update'])->name('fasilitas.update');
+        //delete fasilitas
+    Route::delete('/fasilitas/delete/{id}', [FasilitasController::class, 'destroy'])->name('fasilitas.delete');
+});
