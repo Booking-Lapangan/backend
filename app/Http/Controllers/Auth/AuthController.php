@@ -41,7 +41,12 @@ class AuthController extends Controller
         ];
 
         if (Auth::attempt($credentials, $request->has('remember'))) {
-            return redirect()->route('dashboard');
+            if(Auth::user()->role == 'admin')
+            {
+                return redirect()->route('dashboard');
+            }else{
+                return redirect()->route('user.dashboard');
+            }
         }
 
         return redirect()->route('login')->withErrors(['login' => 'Nomor, Email, atau Password salah']);

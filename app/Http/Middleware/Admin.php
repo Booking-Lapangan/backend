@@ -15,18 +15,13 @@ class Admin
             $user = Auth::user();
             if ($user->role == 'admin') {
                 if ($request->route()->named('dashboard')) {
-                    return $next($request); // Already on the dashboard, no need to redirect
+                    return $next($request); // Already on the dashboard, proceed with the request
                 }
                 return redirect()->route('dashboard');
-            } else {
-                if ($request->route()->named('user.dashboard')) {
-                    return $next($request); // Already on the login page, no need to redirect
-                }
-                return redirect()->route('user.dashboard');
             }
         }
-
-        return $next($request); // User is not authenticated, proceed normally
+        // Handle the case where the user is not authenticated
+        return redirect()->route('login');
     }
 }
 

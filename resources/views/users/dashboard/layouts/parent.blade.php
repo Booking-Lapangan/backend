@@ -4,16 +4,16 @@
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
   <title>@yield('title') | Booking Lapangan</title>
-  @include('admin.layouts.include')
+  @include('users.dashboard.layouts.include')
 </head>
 
 <body>
   <div id="app">
     <div class="main-wrapper">
       <div class="navbar-bg"></div>
-      @include('admin.layouts.header')
+      @include('users.dashboard.layouts.header')
       <div class="main-sidebar sidebar-style-2">
-        @include('admin.layouts.aside')
+        @include('users.dashboard.layouts.aside')
       </div>
 
       <!-- Main Content -->
@@ -28,11 +28,11 @@
           </div>
         </section>
       </div>
-      @include('admin.layouts.footer')
+      @include('users.dashboard.layouts.footer')
     </div>
   </div>
 
-  @include('admin.layouts.script')
+  @include('users.dashboard.layouts.script')
 
   <!-- Page Specific JS File -->
 </body>
