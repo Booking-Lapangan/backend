@@ -40,9 +40,19 @@ class AuthController extends Controller
             'password' => $request->input('password')
         ];
 
+<<<<<<< HEAD
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->intended('dashboard');
+=======
+        if (Auth::attempt($credentials, $request->has('remember'))) {
+            if(Auth::user()->role == 'admin')
+            {
+                return redirect()->route('dashboard');
+            }else{
+                return redirect()->route('user.dashboard');
+            }
+>>>>>>> master
         }
 
         return redirect()->route('login')->withErrors(['login' => 'Nomor, Email, atau Password salah']);

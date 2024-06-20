@@ -34,8 +34,16 @@ Route::get('/gallery', [UsersDashboard::class, 'gallery'])->name('gallery');
 Route::get('/rules', [UsersDashboard::class, 'rules'])->name('rules');
 Route::get('/about', [UsersDashboard::class, 'about'])->name('about');
 
+<<<<<<< HEAD
 Route::prefix('user')->middleware('auth', 'admin')->group(function () {
     Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('user.dashboard');
+=======
+Route::prefix('user')->middleware('auth')->group(function() {
+    Route::get('/dashboard',[UserDashboardController::class,'index'])->name('user.dashboard');
+    Route::get('/history',[UserDashboardController::class,'history'])->name('user.history');
+    Route::get('/profile',[UserDashboardController::class,'profile'])->name('user.profile');
+    Route::put('/edit-profile/{id}',[UserDashboardController::class,'edit_profile'])->name('user.edit.profile');
+>>>>>>> master
 });
 
 Route::prefix('admin')->middleware('auth', 'admin')->group(function () {
