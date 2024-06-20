@@ -5,13 +5,11 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use App\Mail\ResetPasswordMail;
-// use App\Models\PasswordResetOtp;
 use App\Models\User;
 use App\Traits\Fonnte;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-// use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
@@ -26,7 +24,7 @@ class AuthController extends Controller
     public function login_process(Request $request)
     {
         $messages = [
-            'login.required' => 'Nomor HP atau email wajib diisi',
+            'login.required' => 'Nomor HP atau Email wajib diisi',
             'password.required' => 'Password wajib diisi',
         ];
 
@@ -46,7 +44,7 @@ class AuthController extends Controller
             return redirect()->route('dashboard');
         }
 
-        return redirect()->route('login')->withErrors(['login' => 'Nomor, email, atau password salah']);
+        return redirect()->route('login')->withErrors(['login' => 'Nomor, Email, atau Password salah']);
     }
 
     public function register()
@@ -176,7 +174,7 @@ class AuthController extends Controller
 
         Mail::to($user->email)->send(new ResetPasswordMail($otp));
 
-        return redirect()->back()->with('success', 'OTP reset password telah dikirim ke email Anda');
+        return redirect()->route('login')->with('success', 'OTP reset password telah dikirim ke email Anda');
     }
 
     public function validasi_forgot_password($otp)

@@ -1,41 +1,23 @@
-@extends('layouts.custom')
+@extends('auth.layouts.layout')
 
 @section('title', 'Login Page')
 
 @section('content')
-<div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
-    <div class="login-brand">
-        <img src="stisla/assets/img/stisla-fill.svg" alt="logo" width="100" class="shadow-light rounded-circle">
+<h5 class="text-center" style="margin-top: 150px;">
+    Jika Anda Lupa Kata sandi anda, anda bisa memasukan email Akun yang terdaftar di Mahir.Futsal
+  </h5>
+  <form method="POST" action="{{ route('forgot.password.act') }}" class="needs-validation">
+    @csrf
+    <div class="mb-3">
+        <input id="credential" type="text" class="form-control @error('credential') is-invalid @enderror" name="credential" value="{{ old('credential') }}" placeholder="Email" >
+        @error('credential')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+        @enderror   
     </div>
-
-    <div class="card card-primary">
-        <div class="card-header">
-            <h4>Temukan akun Anda</h4>
-        </div>
-
-        <div class="card-body">
-            <!-- resources/views/auth/forgot_password.blade.php -->
-            <form method="POST" action="{{ route('forgot.password.act') }}" class="needs-validation" novalidate>
-                @csrf
-                <div class="form-group">
-                    <label for="credential">Nomor HP atau Email</label>
-                    <input id="credential" type="text" class="form-control @error('credential') is-invalid @enderror" name="credential" value="{{ old('credential') }}" tabindex="1" >
-                    @error('credential')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
-                        Login
-                    </button>
-                </div>
-            </form>
-        </div>
+    <div class="d-grid">
+      <button type="submit" class="btn btn-primary">Submit</button>
     </div>
-    <div class="simple-footer">
-        Copyright &copy; Stisla 2018
-    </div>
-</div>
+  </form>
 @endsection

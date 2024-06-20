@@ -1,19 +1,17 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\Backend\DashboardController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Backend\RulesController;
+use App\Http\Controllers\UsersDashboard;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+// Route::get('/', function () {
+//  return view('users.home');
+// });
+
+Route::get('lapangan', function () {
+ return view('users.lapangan');
+});
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login/process', [AuthController::class, 'login_process'])->name('login.process');
@@ -32,11 +30,11 @@ Route::post('/forgot-password-act', [AuthController::class, 'forgot_password_act
 Route::get('/validasi-forgot-password/{otp}', [AuthController::class, 'validasi_forgot_password'])->name('validasi.forgot.password');
 Route::post('/validasi-forgot-password-act', [AuthController::class, 'validasi_forgot_password_act'])->name('validasi.forgot.password.act');
 
-// // Route untuk menampilkan form validasi OTP
-// Route::get('/validasi-forgot-password/{otp}', [AuthController::class, 'validasi_forgot_password'])->name('validasi.forgot.password');
+Route::resource('rules', RulesController::class);
+Route::post('rules/storeMultiple', [RulesController::class, 'storeMultiple'])->name('rules.storeMultiple');
 
-// // Route untuk menangani form validasi OTP
-// Route::post('/validasi-forgot-password-act', [AuthController::class, 'validasi_forgot_password_act'])->name('validasi.forgot.password.act');
-
-// Route untuk menangani form reset password
-Route::post('/password/update', [AuthController::class, 'update_password'])->name('password.update');
+Route::get('/', [UsersDashboard::class, 'home'])->name('home');
+Route::get('/lapangan', [UsersDashboard::class, 'lapangan'])->name('lapangan');
+Route::get('/gallery', [UsersDashboard::class, 'gallery'])->name('gallery');
+Route::get('/rules', [UsersDashboard::class, 'rules'])->name('rules');
+Route::get('/about', [UsersDashboard::class, 'about'])->name('about');
