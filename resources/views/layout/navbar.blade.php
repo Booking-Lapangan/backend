@@ -16,47 +16,67 @@
   <body>
   <div class="wrapper">
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg sticky-top bg-body-tertiary">
+ <nav class="navbar navbar-expand-lg sticky-top bg-body-tertiary">
     <div class="container-fluid">
-      <a class="navbar-brand text-dark fs-4 fw-bold" href="#">Navbar</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ms-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px">
-          <ul class="nav">
-            <li class="nav-item">
-                <a href="{{ route('home') }}" class="btn btn-light nav-link {{ request()->routeIs('home') ? 'text-primary fw-bold' : 'text-dark' }}">
-                    <p class="fw-bolder">Home</p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ route('lapangan') }}" class="btn btn-light nav-link {{ request()->routeIs('lapangan') ? 'text-primary fw-bold' : 'text-dark' }}">
-                    <p class="fw-bolder">Venue</p>
-                </a>
-            </li>
-        </ul>
-        
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <button type="button" class="btn btn-light position-relative">
-                <i class="fa-solid fa-cart-shopping"></i>
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                  99+
-                  <span class="visually-hidden">unread messages</span>
-                </span>
-              </button>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <button type="button" class="btn btn-outline-dark position-relative">
-                <i class="fa-solid fa-user"></i>
-              </button>
-            </a>
-          </li>
-        </ul>
-      </div>
+        <a class="navbar-brand text-dark fs-4 fw-bold" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a href="{{ route('home') }}" class="btn btn-light nav-link {{ request()->routeIs('home') ? 'text-primary fw-bold' : 'text-dark' }}">
+                            <p class="fw-bolder">Home</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('lapangan') }}" class="btn btn-light nav-link {{ request()->routeIs('lapangan') ? 'text-primary fw-bold' : 'text-dark' }}">
+                            <p class="fw-bolder">Venue</p>
+                        </a>
+                    </li>
+                </ul>
+
+                @auth
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <button type="button" class="btn btn-light position-relative">
+                                <i class="fa-solid fa-cart-shopping"></i>
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                    99+
+                                    <span class="visually-hidden">unread messages</span>
+                                </span>
+                            </button>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <button type="button" class="btn btn-outline-dark position-relative">
+                                <i class="fa-solid fa-user"></i>
+                            </button>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <li><a class="dropdown-item" href="#">Akun</a></li>
+                          <li><a class="dropdown-item" href="#">Akun</a></li>
+                          <li><a class="dropdown-item" href="#">Logout</a></li>
+                        </ul>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}">
+                            <button type="button" class="btn btn-outline-primary">Login</button>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('register') }}">
+                            <button type="button" class="btn btn-primary">Register</button>
+                        </a>
+                    </li>
+                @endauth
+            </ul>
+        </div>
     </div>
-  </nav>
+</nav>
+
+
   <!-- End Navbar -->

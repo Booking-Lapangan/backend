@@ -11,7 +11,7 @@
           @csrf
           <div class="divider form-text">Login menggunakan Akun</div>
           <div class="mb-3">
-            <input id="login" type="text" class="form-control @error('login') is-invalid @enderror" name="login" value="{{ old('login') }}"  placeholder="Email atau No HP">
+            <input id="login" type="text" class="form-control @error('login') is-invalid @enderror" name="login" value="{{ old('login') }}"  placeholder="Email atau No HP" autofocus>
             @error('login')
               <div class="invalid-feedback">
                 {{ $message }}

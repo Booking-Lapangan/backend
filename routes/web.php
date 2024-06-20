@@ -3,14 +3,16 @@
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\RulesController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UsersDashboard;
 
 // Route::get('/', function () {
 //  return view('users.home');
 // });
 
+Route::get('/dashboard', [DashboardController::class, 'index']);
 
-Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::get('/login', [AuthController::class, 'login'])->name('login')->middleware('guest');
 Route::post('/login/process', [AuthController::class, 'login_process'])->name('login.process');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
