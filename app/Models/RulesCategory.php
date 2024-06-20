@@ -17,6 +17,6 @@ class RulesCategory extends Model
 
     public function rules()
     {
-        return $this->hasMany(Rules::class, 'id_category');
+        return $this->belongsTo(Rules::class, 'id_category');
     }
 }
