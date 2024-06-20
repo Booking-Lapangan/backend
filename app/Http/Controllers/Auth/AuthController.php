@@ -24,7 +24,7 @@ class AuthController extends Controller
     public function login_process(Request $request)
     {
         $messages = [
-            'login.required' => 'Nomor HP atau email wajib diisi',
+            'login.required' => 'Nomor HP atau Email wajib diisi',
             'password.required' => 'Password wajib diisi',
         ];
 
@@ -44,7 +44,7 @@ class AuthController extends Controller
             return redirect()->route('dashboard');
         }
 
-        return redirect()->route('login')->withErrors(['login' => 'Nomor, email, atau password salah']);
+        return redirect()->route('login')->withErrors(['login' => 'Nomor, Email, atau Password salah']);
     }
 
     public function register()

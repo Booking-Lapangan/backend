@@ -1,0 +1,72 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8f9fa;
+}
+.container-custom {
+    display: flex;
+    flex-wrap: nowrap;
+    max-width: 900px;
+    width: 100%;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+.auth-container {
+    padding: 20px;
+    flex: 1;
+}
+.auth-container h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    text-align: center;
+}
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.divider::before,
+.divider::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid #ddd;
+}
+.divider:not(:empty)::before {
+    margin-right: 0.25em;
+}
+.divider:not(:empty)::after {
+    margin-left: 0.25em;
+}
+.form-control:focus {
+    box-shadow: none;
+    border-color: #4070f4;
+}
+.btn-primary {
+    background-color: #4070f4;
+    border-color: #4070f4;
+}
+.btn-primary:hover {
+    background-color: #305ec9;
+    border-color: #305ec9;
+}
+.form-text {
+    text-align: center;
+}
+.image-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.image-container img {
+    max-width: 100%;
+    height: auto;
+    border-left: 1px solid #ddd;
+}
