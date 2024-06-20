@@ -1,6 +1,6 @@
 <aside id="sidebar-wrapper">
   <div class="sidebar-brand">
-    <a href="{{ route('dashboard') }}">Mahir Booking</a>
+    <a href="{{ route('home') }}">Mahir Booking</a>
   </div>
   <div class="sidebar-brand sidebar-brand-sm">
     <a href="index.html">St</a>
@@ -29,25 +29,10 @@
           <span>Fasilitas</span></a>
       </li>
       <li id="menu-rules" class="sidebar-item">
-        <a class="nav-link" href="{{ route('rules') }}">
+        <a class="nav-link" href="#">
           <i class="far fa-square"></i> 
           <span>Rules</span></a>
       </li>
   </ul>
 </aside>
-{{-- <script>
-
-  document.addEventListener('DOMContentLoaded', (event) => {
-      const menuItems = document.querySelectorAll('.nav-item');
-  
-      menuItems.forEach(item => {
-          item.addEventListener('click', function() {
-              // Remove active class from all items
-              menuItems.forEach(i => i.classList.remove('active'));
-              // Add active class to the clicked item
-              this.classList.add('active');
-          });
-      });
-  });
-</script> --}}
 
