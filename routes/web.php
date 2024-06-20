@@ -9,9 +9,6 @@ use App\Http\Controllers\UsersDashboard;
 //  return view('users.home');
 // });
 
-Route::get('lapangan', function () {
- return view('users.lapangan');
-});
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login/process', [AuthController::class, 'login_process'])->name('login.process');
