@@ -12,13 +12,13 @@ class RulesController extends Controller
     public function index()
     {
         $rules = Rules::with('category')->get();
-        return view('rules.index', compact('rules'));
+        return view('admin.rules.index', compact('rules'));
     }
 
     public function create()
     {
         $categories = RulesCategory::all();
-        return view('rules.create', compact('categories'));
+        return view('admin.rules.create', compact('categories'));
     }
 
     public function store(Request $request)
@@ -50,14 +50,14 @@ class RulesController extends Controller
     public function show($id)
     {
         $rule = Rules::find($id);
-        return view('rules.show', compact('rule'));
+        return view('admin.rules.show', compact('rule'));
     }
 
     public function edit($id)
     {
         $rule = Rules::find($id);
         $categories = RulesCategory::all();
-        return view('rules.edit', compact('rule', 'categories'));
+        return view('admin.rules.edit', compact('rule', 'categories'));
     }
 
     public function update(Request $request, $id)
