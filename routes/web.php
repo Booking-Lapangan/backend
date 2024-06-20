@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Backend\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\RulesController;
+use App\Http\Controllers\User\DashboardController as UserDashboardController;
 use App\Http\Controllers\UsersDashboard;
 
 // Route::get('/', function () {
@@ -30,11 +32,19 @@ Route::post('/forgot-password-act', [AuthController::class, 'forgot_password_act
 Route::get('/validasi-forgot-password/{otp}', [AuthController::class, 'validasi_forgot_password'])->name('validasi.forgot.password');
 Route::post('/validasi-forgot-password-act', [AuthController::class, 'validasi_forgot_password_act'])->name('validasi.forgot.password.act');
 
-Route::resource('rules', RulesController::class);
-Route::post('rules/storeMultiple', [RulesController::class, 'storeMultiple'])->name('rules.storeMultiple');
 
 Route::get('/', [UsersDashboard::class, 'home'])->name('home');
 Route::get('/lapangan', [UsersDashboard::class, 'lapangan'])->name('lapangan');
 Route::get('/gallery', [UsersDashboard::class, 'gallery'])->name('gallery');
 Route::get('/rules', [UsersDashboard::class, 'rules'])->name('rules');
 Route::get('/about', [UsersDashboard::class, 'about'])->name('about');
+
+Route::prefix('user')->middleware('auth','admin')->group(function() {
+    Route::get('/dashboard',[UserDashboardController::class,'index'])->name('user.dashboard');
+});
+
+Route::prefix('admin')->middleware('auth','admin')->group(function() {
+    Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
+    Route::resource('rules', RulesController::class);
+    Route::post('rules/storeMultiple', [RulesController::class, 'storeMultiple'])->name('rules.storeMultiple');
+});
