@@ -1,6 +1,6 @@
 <aside id="sidebar-wrapper">
     <div class="sidebar-brand">
-      <a href="index.html">Mahir Booking</a>
+      <a href="{{ route('home') }}">Mahir Booking</a>
     </div>
     <div class="sidebar-brand sidebar-brand-sm">
       <a href="index.html">St</a>

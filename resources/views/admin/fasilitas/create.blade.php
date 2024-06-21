@@ -5,28 +5,31 @@
 @section('top', 'Fasilitas Create')
 
 @section('content')
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-6">
-                <form action="{{route('fasilitas.create.process')}}" method="POST">
-                    @csrf
-                    @method('POST')
-                    <div class="form-group">
-                        <label>Nama Fasilitas</label>
-                        <input type="text" name="name" class="form-control">
-                      </div>
-                    <div class="form-group">
-                        <label for="" class="form-label">Detail Fasilitas</label>
-                        <input type="text" name="detail_fasilitas" class="form-control">
+    <div class="section-body">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <form action="{{ route('fasilitas.create.process') }}" method="POST">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="name">Nama Fasilitas</label>
+                                    <input type="text" id="name" name="name" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="detail_fasilitas">Detail Fasilitas</label>
+                                    <input type="text" id="detail_fasilitas" name="detail_fasilitas" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="deskripsi">Deskripsi</label>
+                                    <textarea id="deskripsi" name="descripsi" class="form-control"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="" class="form-label">Deskripsi</label>
-                        <input type="text" name="descripsi" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-primary">Submit</button>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>

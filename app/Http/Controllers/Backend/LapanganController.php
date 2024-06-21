@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Fasilitas;
 use App\Models\Lapangan;
+use App\Models\Rules;
 use App\Models\Schedule;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -15,13 +16,14 @@ class LapanganController extends Controller
     public function index()
     {
         $lapangan = Lapangan::all();
-        return view('admin.lapangan.index',compact('lapangan'));
+        return view('admin.lapangan.index', compact('lapangan'));
     }
 
     public function create()
     {
         $fasilitas = Fasilitas::all();
-        return view('admin.lapangan.create',compact('fasilitas'));
+        $rules = Rules::all();
+        return view('admin.lapangan.create', compact('fasilitas', 'rules'));
     }
 
     public function store(Request $request)
@@ -32,22 +34,25 @@ class LapanganController extends Controller
             'title' => 'required|string|max:255',
             'price' => 'required|string',
             'fasilitas' => 'required|array',
-            'fasilitas.*' => 'string'
+            'fasilitas.*' => 'string',
+            'rules' => 'required|array',
+            'rules.*' => 'string'
         ]);
-    
+
         // Upload gambar
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('assets', 'public');
         } else {
             return redirect()->back()->with('error', 'File gambar tidak ditemukan.');
         }
-    
+
         // Simpan data lapangan
         $lapangan = Lapangan::create([
             'image' => $imagePath, // Simpan path gambar
             'title' => $validatedData['title'],
             'price' => $validatedData['price'],
             'fasilitas' => json_encode($validatedData['fasilitas']),
+            'rules' => json_encode($validatedData['rules']),
         ]);
 
         // Buat jadwal untuk 7 hari ke depan
@@ -67,7 +72,7 @@ class LapanganController extends Controller
                 }
             }
         }
-    
+
         return redirect()->route('lapangan.index')->with('success', 'Lapangan berhasil dibuat.');
     }
 
@@ -75,13 +80,15 @@ class LapanganController extends Controller
     {
         $lapangan = Lapangan::find($id);
         $fasilitas = Fasilitas::all();
-        return view('admin.lapangan.edit',compact('lapangan','fasilitas'));
+        $rules = Rules::all();
+
+        return view('admin.lapangan.edit', compact('lapangan', 'fasilitas', 'rules'));
     }
-    
+
     public function show($id)
     {
         $lapangan = Lapangan::find($id);
-        return view('admin.lapangan.detail',compact('lapangan'));
+        return view('admin.lapangan.detail', compact('lapangan'));
     }
 
     public function update(Request $request, $id)
@@ -92,7 +99,9 @@ class LapanganController extends Controller
             'title' => 'required|string|max:255',
             'price' => 'required|string',
             'fasilitas' => 'required|array',
-            'fasilitas.*' => 'string'
+            'fasilitas.*' => 'string',
+            'rules' => 'required|array',
+            'rules.*' => 'string'
         ]);
 
         // Temukan data lapangan berdasarkan ID
@@ -115,6 +124,7 @@ class LapanganController extends Controller
             'title' => $validatedData['title'],
             'price' => $validatedData['price'],
             'fasilitas' => json_encode($validatedData['fasilitas']), // Update fasilitas sebagai JSON
+            'rules' => json_encode($validatedData['rules']), // Update fasilitas sebagai JSON
         ]);
 
         return redirect()->route('lapangan.index')->with('success', 'Data lapangan berhasil diperbarui.');

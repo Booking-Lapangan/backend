@@ -23,7 +23,7 @@ class DashboardController extends Controller
         return view('users.dashboard.profile.index');
     }
 
-    public function edit_profile(Request $request,$id)
+    public function edit_profile(Request $request, $id)
     {
         $user = User::find($id);
 

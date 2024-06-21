@@ -8,12 +8,6 @@ use Illuminate\Database\Seeder;
 
 class RulesCategorySeeder extends Seeder
 {
-<<<<<<< HEAD
-=======
-    /**
-     * Run the database seeds.
-     */
->>>>>>> master
     public function run(): void
     {
         RulesCategory::insert([

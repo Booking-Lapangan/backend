@@ -12,7 +12,6 @@ use App\Http\Controllers\User\DashboardController as UserDashboardController;
 use App\Http\Controllers\UsersDashboard;
 
 
-Route::get('/dashboard', [DashboardController::class, 'index']);
 
 Route::get('/login', [AuthController::class, 'login'])->name('login')->middleware('guest');
 Route::post('/login/process', [AuthController::class, 'login_process'])->name('login.process');
@@ -33,49 +32,51 @@ Route::post('/validasi-forgot-password-act', [AuthController::class, 'validasi_f
 
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
-Route::get('/lapangan/detail/{title}', [HomeController::class, 'lapangan'])->name('lapangan');
+Route::get('/lapangan', [HomeController::class, 'lapangan'])->name('lapangan');
+Route::get('/lapangan/detail/{title}', [HomeController::class, 'lapangan_detail'])->name('lapangan_detail');
 Route::get('/gallerys', [HomeController::class, 'gallery'])->name('gallery');
 Route::get('/rules', [HomeController::class, 'rules'])->name('rules');
 Route::get('/abouts', [HomeController::class, 'about'])->name('about');
 
-Route::prefix('user')->middleware(['auth', 'checkrole:user'])->group(function() {
-    Route::get('/dashboard',[UserDashboardController::class,'index'])->name('user.dashboard');
-    Route::get('/history',[UserDashboardController::class,'history'])->name('user.history');
-    Route::get('/profile',[UserDashboardController::class,'profile'])->name('user.profile');
-    Route::put('/edit-profile/{id}',[UserDashboardController::class,'edit_profile'])->name('user.edit.profile');
+Route::prefix('user')->middleware(['auth', 'checkrole:user'])->group(function () {
+    Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('user.dashboard');
+    Route::get('/history', [UserDashboardController::class, 'history'])->name('user.history');
+    Route::get('/profile', [UserDashboardController::class, 'profile'])->name('user.profile');
+    Route::put('/edit-profile/{id}', [UserDashboardController::class, 'edit_profile'])->name('user.edit.profile');
 });
 
-Route::prefix('admin')->middleware(['auth', 'checkrole:admin'])->group(function() {
-    Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
+Route::prefix('admin')->middleware(['auth', 'checkrole:admin'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('rules', RulesController::class);
     Route::post('rules/storeMultiple', [RulesController::class, 'storeMultiple'])->name('rules.storeMultiple');
 
-    Route::get('/lapangan',[LapanganController::class,'index'])->name('lapangan.index');
 
-    Route::get('/lapangan/create',[LapanganController::class,'create'])->name('lapangan.create');
+    Route::get('/lapangan', [LapanganController::class, 'index'])->name('lapangan.index');
 
-    Route::post('/lapangan/create/process',[LapanganController::class,'store'])->name('lapangan.store');
+    Route::get('/lapangan/create', [LapanganController::class, 'create'])->name('lapangan.create');
 
-    Route::get('/lapangan/{id}',[LapanganController::class,'show'])->name('lapangan.show');
+    Route::post('/lapangan/create/process', [LapanganController::class, 'store'])->name('lapangan.store');
 
-    Route::get('/lapangan/edit/{id}',[LapanganController::class,'edit'])->name('lapangan.edit');
+    Route::get('/lapangan/{id}', [LapanganController::class, 'show'])->name('lapangan.show');
 
-    Route::put('/lapangan/update/{id}',[LapanganController::class,'update'])->name('lapangan.update');
+    Route::get('/lapangan/edit/{id}', [LapanganController::class, 'edit'])->name('lapangan.edit');
 
-    Route::delete('/lapangan/delete/{id}',[LapanganController::class,'destroy'])->name('lapangan.destroy');
+    Route::put('/lapangan/update/{id}', [LapanganController::class, 'update'])->name('lapangan.update');
+
+    Route::delete('/lapangan/delete/{id}', [LapanganController::class, 'destroy'])->name('lapangan.destroy');
 
     Route::get('/fasilitas', [FasilitasController::class, 'index'])->name('fasilitas.index');
-        //create fasilitas
+    //create fasilitas
     Route::get('/fasilitas/create', [FasilitasController::class, 'create'])->name('fasilitas.create');
     Route::post('/fasilitas/create/process', [FasilitasController::class, 'store'])->name('fasilitas.create.process');
-        //show fasilitas
+    //show fasilitas
     Route::get('/fasilitas/{id}', [FasilitasController::class, 'show'])->name('fasilitas.show');
-        //edit fasilitas
+    //edit fasilitas
     Route::get('/fasilitas/edit/{id}', [FasilitasController::class, 'edit'])->name('fasilitas.edit');
     Route::put('/fasilitas/update/{id}', [FasilitasController::class, 'update'])->name('fasilitas.update');
-        //delete fasilitas
+    //delete fasilitas
     Route::delete('/fasilitas/delete/{id}', [FasilitasController::class, 'destroy'])->name('fasilitas.delete');
 
-    Route::get('/gallery/{title}',[GalleryController::class,'index'])->name('gallery.index');
-    Route::post('/gallery/process',[GalleryController::class,'store'])->name('gallery.process');
+    Route::get('/gallery/{title}', [GalleryController::class, 'index'])->name('gallery.index');
+    Route::post('/gallery/process', [GalleryController::class, 'store'])->name('gallery.process');
 });

@@ -28,6 +28,16 @@
             @empty
             @endforelse
         </div>
+        <label class="form-label" for="id_rules">Rules</label>
+        <div class=" mb-3">
+            @forelse ($rules as $item)
+            <div class="d-flex">
+                <input class="form-checkbox mr-2" type="checkbox" value="{{$item->rules}}" name="rules[]" id="id_rules">
+                <label class="form-label mt-2" for="id_rules">{{$item->rules}}</label>
+            </div>
+            @empty
+            @endforelse
+        </div>
         <div class="mb-3">
             <button class="btn btn-warning" type="submit">Submit</button>
         </div>

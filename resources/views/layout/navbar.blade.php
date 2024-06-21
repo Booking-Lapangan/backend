@@ -30,7 +30,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="" class="btn btn-light nav-link {{ request()->routeIs('lapangan') ? 'text-primary fw-bold' : 'text-dark' }}">
+                <a href="{{ route('lapangan') }}" class="btn btn-light nav-link {{ request()->routeIs('lapangan') ? 'text-primary fw-bold' : 'text-dark' }}">
                   <p class="fw-bolder">Venue</p>
                 </a>
               </li>
@@ -55,7 +55,9 @@
                 </button>
               </a>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
+                @auth
+                <li><a class="dropdown-item" href="{{ Auth::user()->role == 'admin' ? route('dashboard') : route('user.dashboard') }}">Dashboard</a></li>
+              @endauth
                 <li><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
               </ul>
             </li>

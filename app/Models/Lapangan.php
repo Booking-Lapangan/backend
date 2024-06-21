@@ -12,11 +12,13 @@ class Lapangan extends Model
         'image',
         'title',
         'price',
-        'fasilitas'
+        'fasilitas',
+        'rules'
     ];
 
     protected $casts = [
         'fasilitas' => 'array',
+        'rules' => 'array',
     ];
 
     public function schedules()

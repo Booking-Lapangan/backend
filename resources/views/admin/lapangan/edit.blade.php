@@ -33,6 +33,19 @@
             @empty
             @endforelse
         </div>
+        <label class="form-label" for="rules_id">Rules</label>
+        <div class=" mb-3">
+            @php
+                $rulesArray = json_decode($lapangan->rules);
+            @endphp
+            @forelse ($rules as $item)
+            <div class="d-flex">
+                <input class="form-checkbox mr-2" type="checkbox" value="{{$item->rules}}"  {{ in_array($item->rules, $rulesArray) ? 'checked' : '' }} name="rules[]" id="rules_id">
+                <label class="form-label mt-2" for="rules_id">{{$item->rules}}</label>
+            </div>
+            @empty
+            @endforelse
+        </div>
         <div class="mb-3">
             <button class="btn btn-warning" type="submit">Submit</button>
         </div>

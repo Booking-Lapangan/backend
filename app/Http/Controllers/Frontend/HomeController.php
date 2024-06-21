@@ -12,13 +12,18 @@ class HomeController extends Controller
     public function home()
     {
         $lapangan = Lapangan::all();
-        return view('users.home',compact('lapangan'));
+        return view('users.home', compact('lapangan'));
+    }
+    public function lapangan()
+    {
+        $lapangan = Lapangan::all();
+        return view('users.lapangan', compact('lapangan'));
     }
 
-    public function lapangan($title)
+    public function lapangan_detail($title)
     {
-        $lapangan = Lapangan::where('title',$title)->first();
-        return view('users.lapangan',compact('lapangan'));
+        $lapangan_detail = Lapangan::where('title', $title)->first();
+        return view('users.lapangan', compact('lapangan_detail'));
     }
 
     public function gallery()
