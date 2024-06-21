@@ -22,43 +22,20 @@
           <h3>Lapangan Mahir Futsal</h3>
         </div>
         <div class="row">
-          <div class="col-md-4">
-            <div class="card">
-              <img src="assets/img/img3.jpeg" class="card-img-top" alt="Image 1" />
-              <div class="card-body text-center">
-                <h5 class="card-title">Lapangan 1</h5>
-                <p class="card-text">Rp. 100.000-175.000</p>
-                <a href="project/jadwal.html" class="btn btn-primary"
-                  >Lihat Jadwal</a
-                >
+          @foreach ($lapangan as $item)
+            <!-- Card 1 -->
+          <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card mb-3" style="width: 100%;">
+              <img src="/assets/img/gambar3.jpeg" class="card-img-top" alt="Lapangan Sintetis 1">
+              <div class="card-body">
+                <h5 class="card-title fw-bold">{{$item->title}}</h5>
+                <p class="card-text">Rp. {{$item->price}}</p>
+                <a href="jadwal.html" class="btn btn-primary">Lihat Jadwal</a>
               </div>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="card">
-              <img src="assets/img/img3.jpeg" class="card-img-top" alt="Image 2" />
-              <div class="card-body text-center">
-                <h5 class="card-title">Lapangan 2</h5>
-                <p class="card-text">Rp. 100.000-175.000</p>
-                <a href="project/jadwal.html" class="btn btn-primary"
-                  >Lihat Jadwal</a
-                >
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card">
-              <img src="assets/img/img3.jpeg" class="card-img-top" alt="Image 3" />
-              <div class="card-body text-center">
-                <h5 class="card-title">Lapangan 3</h5>
-                <p class="card-text">Rp. 100.000-175.000</p>
-                <a href="project/jadwal.html" class="btn btn-primary"
-                  >Lihat Jadwal</a
-                >
-              </div>
-            </div>
-          </div>
-        </div>
+          <!-- End Card 1 -->
+          @endforeach
       </div>
 
       <!-- Why Choose Us Section -->

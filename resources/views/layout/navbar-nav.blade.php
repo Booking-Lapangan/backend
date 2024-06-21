@@ -1,7 +1,7 @@
 <nav class="border border-dark border-start-0 border-end-0 mb-3">
   <ul class="nav justify-content-center">
       <li class="nav-item">
-          <a href="{{ route('lapangan') }}" class="btn btn-light nav-link {{ request()->routeIs('lapangan') ? 'text-primary fw-bold' : 'text-dark' }}">
+          <a href="" class="btn btn-light nav-link {{ request()->routeIs('lapangan') ? 'text-primary fw-bold' : 'text-dark' }}">
               <p class="fw-bolder">Lapangan</p>
           </a>
       </li>
