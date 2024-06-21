@@ -30,7 +30,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('lapangan') }}" class="btn btn-light nav-link {{ request()->routeIs('lapangan') ? 'text-primary fw-bold' : 'text-dark' }}">
+                <a href="" class="btn btn-light nav-link {{ request()->routeIs('lapangan') ? 'text-primary fw-bold' : 'text-dark' }}">
                   <p class="fw-bolder">Venue</p>
                 </a>
               </li>
