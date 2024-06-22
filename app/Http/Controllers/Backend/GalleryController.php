@@ -12,17 +12,15 @@ class GalleryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($title)
+    public function index($id)
     {
-        $lapangan = Lapangan::where('title',$title)->first();
-        $gallery = Gallery::where('lapangan_id',$lapangan->id)->get();
+        $lapangan = Lapangan::where('id', $id)->first();
+        $gallery = Gallery::where('lapangan_id', $lapangan->id)->get();
         // dd($gallery);
-        return view('admin.gallery.index',compact('lapangan','gallery'));
+        return view('admin.gallery.index', compact('lapangan', 'gallery'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         //

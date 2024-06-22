@@ -16,6 +16,6 @@ class Gallery extends Model
 
     public function lapangan()
     {
-        return $this->belongsTo(Lapangan::class);
+        return $this->belongsTo(Lapangan::class, 'id');
     }
 }

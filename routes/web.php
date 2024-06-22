@@ -9,8 +9,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\RulesController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\User\DashboardController as UserDashboardController;
-use App\Http\Controllers\UsersDashboard;
-
 
 
 Route::get('/login', [AuthController::class, 'login'])->name('login')->middleware('guest');

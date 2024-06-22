@@ -4,23 +4,32 @@
   <div class="row align-items-start">
       <!-- Left Column -->
       <div class="col-md-6">
-          <!-- Booking Information -->
-          <div class="p-2 mb-4 border border-dark rounded">
-              <ul>
-                  <li>Pemesanan lapangan valid apabila sudah ada konfirmasi dari online booking system, dan harus ditunjukkan kepada staf Inspire Arena.</li>
-                  <li>Pengguna lapangan yang walk-in tetap melakukan pemesanan dan pembayaran via sistem sebelum memasuki lapangan.</li>
-                  <li>TIDAK ADA perpanjangan waktu untuk keterlambatan pengguna lapangan di jam reservasi.</li>
-                  <li>TIDAK ADA kebijakan Refund dari pihak pengelola; Reschedule bisa dilakukan by request melalui sistem selambatnya H-5.</li>
-                  <li>Peminjaman bola bisa dilakukan dengan menitipkan KTP atau SIM ke staf Inspire Arena.</li>
-                  <li>Kunci kendaraan Anda di parkiran, dan tunjukkan karcis parkir ketika meninggalkan Inspire Arena.</li>
-                  <li>Barang bawaan menjadi tanggung jawab masing-masing; segala bentuk kerusakan dan kehilangan di luar tanggung jawab Inspire Arena.</li>
-                  <li>Jagalah kebersihan di seluruh area Inspire Arena dan buanglah sampah ke tempat sampah yang telah disediakan.</li>
-                  <li>DILARANG merokok di semua area lapangan, foodcourt dll; merokok hanya diperbolehkan di area yang disediakan di taman belakang.</li>
-                  <li>DILARANG membawa air mineral kemasan sekali pakai, kami menyediakan air minum isi ulang secara gratis untuk semua pengunjung.</li>
-                  <li>DILARANG makan dan minum di dalam lapangan.</li>
-                  <li>DILARANG membawa senjata tajam, minuman keras / alkohol maupun obat-obatan terlarang.</li>
-              </ul>
-          </div>
+        <div class="p-2 mb-4 border border-dark rounded">
+            <h3>Rules In Field</h3>
+            <ul>
+                @foreach($rulesInField as $rule)
+                    <li>{{ $rule->rules }}</li>
+                @endforeach
+            </ul>
+        </div>
+        
+        <div class="p-2 mb-4 border border-dark rounded">
+            <h3>Rules Out Field</h3>
+            <ul>
+                @foreach($rulesOutField as $rule)
+                    <li>{{ $rule->rules }}</li>
+                @endforeach
+            </ul>
+        </div>
+        
+        <div class="p-2 mb-4 border border-dark rounded">
+            <h3>Rules Rent</h3>
+            <ul>
+                @foreach($rulesRent as $rule)
+                    <li>{{ $rule->rules }}</li>
+                @endforeach
+            </ul>
+        </div>
           <!-- Booking Steps -->
           <div class="border border-dark rounded p-3">
               <div class="text-center">

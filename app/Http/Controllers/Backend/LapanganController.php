@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Fasilitas;
+use App\Models\Gallery;
 use App\Models\Lapangan;
 use App\Models\Rules;
 use App\Models\Schedule;
@@ -53,6 +54,12 @@ class LapanganController extends Controller
             'price' => $validatedData['price'],
             'fasilitas' => json_encode($validatedData['fasilitas']),
             'rules' => json_encode($validatedData['rules']),
+        ]);
+
+        // Simpan data ke table galleries
+        Gallery::create([
+            'lapangan_id' => $lapangan->id,
+            'gallery' => $imagePath,
         ]);
 
         // Buat jadwal untuk 7 hari ke depan
