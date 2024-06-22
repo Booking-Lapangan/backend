@@ -78,3 +78,13 @@ Route::prefix('admin')->middleware(['auth', 'checkrole:admin'])->group(function 
     Route::get('/gallery/{title}', [GalleryController::class, 'index'])->name('gallery.index');
     Route::post('/gallery/process', [GalleryController::class, 'store'])->name('gallery.process');
 });
+
+Route::get('/book',[BookController::class,'index'])->name('book.index');
+
+Route::get('/book/create',[BookController::class,'create'])->name('book.create');
+
+Route::post('/book/create/process',[BookController::class,'store'])->name('book.store');
+
+Route::get('/book/{id}',[BookController::class,'show'])->name('book.show');
+
+Route::get('/book/edit',[BookController::class,'edit'])->name('book.edit');
