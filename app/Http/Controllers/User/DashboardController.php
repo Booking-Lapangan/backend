@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Booking;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -15,7 +17,11 @@ class DashboardController extends Controller
 
     public function history()
     {
-        return view('users.dashboard.history.index');
+        $user = Auth::user();
+        $bookings = Booking::where('user_id', $user->id)
+            ->with('lapangan')
+            ->get();
+        return view('users.dashboard.history.index', compact('user', 'bookings'));
     }
 
     public function profile()

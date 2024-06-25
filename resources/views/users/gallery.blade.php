@@ -16,3 +16,6 @@
       @endforeach
     </div>
   </div>
+  
+
+  @include('layout.footer')

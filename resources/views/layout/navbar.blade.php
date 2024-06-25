@@ -38,16 +38,17 @@
 
             @auth
             <li class="nav-item">
-              <a class="nav-link" href="#">
-                <button type="button" class="btn btn-light position-relative">
-                  <i class="fa-solid fa-cart-shopping"></i>
-                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    99+
-                    <span class="visually-hidden">unread messages</span>
-                  </span>
-                </button>
+              <a class="nav-link" href="{{ route('user.cart') }}">
+                  <button type="button" class="btn btn-light position-relative">
+                      <i class="fa-solid fa-cart-shopping"></i>
+                      <span id="cart-badge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                          {{-- {{ $bookingCount }} --}}0
+                          <span class="visually-hidden">unread messages</span>
+                      </span>
+                  </button>
               </a>
-            </li>
+          </li>
+          
             <li class="nav-item dropdown">
               <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <button type="button" class="btn btn-outline-dark position-relative">
@@ -78,3 +79,33 @@
       </div>
     </nav>
     <!-- End Navbar -->
+
+    {{-- <script>
+      // Ambil element badge
+      const cartBadge = document.getElementById('cart-badge');
+  
+      // Fungsi untuk update nilai badge
+      function updateCartBadge(count) {
+          cartBadge.textContent = count;
+      }
+  
+      // Panggil fungsi updateCartBadge untuk menginisialisasi nilai awal
+      updateCartBadge({{ $bookingCount }}); // Menggunakan nilai dari Blade
+  
+      // Contoh sederhana untuk update nilai badge secara dinamis setelah aksi tertentu (misalnya setelah menambah booking)
+      // Fungsi ini bisa dipanggil setelah ada perubahan pada jumlah booking
+      function updateBadgeFromBackend() {
+          // Misalnya, menggunakan Axios atau Fetch untuk mengambil data dari server
+          // Ganti URL sesuai dengan endpoint yang sesuai di aplikasi Laravel Anda
+          fetch('{{ route('user.cart.count') }}')
+              .then(response => response.json())
+              .then(data => {
+                  updateCartBadge(data.bookingCount); // Update nilai badge dengan data terbaru
+              })
+              .catch(error => console.error('Error:', error));
+      }
+  
+      // Panggil fungsi updateBadgeFromBackend untuk update badge secara dinamis (misalnya saat halaman dimuat)
+      updateBadgeFromBackend();
+  </script> --}}
+  

@@ -1,12 +1,15 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Backend\BookingController;
 use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\DetailBookingController;
 use App\Http\Controllers\Backend\FasilitasController;
 use App\Http\Controllers\Backend\GalleryController;
 use App\Http\Controllers\Backend\LapanganController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\RulesController;
+use App\Http\Controllers\Backend\ScheduleController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\User\DashboardController as UserDashboardController;
 
@@ -35,12 +38,24 @@ Route::get('/lapangan/detail/{title}', [HomeController::class, 'lapangan_detail'
 Route::get('/gallerys', [HomeController::class, 'gallery'])->name('gallery');
 Route::get('/rules', [HomeController::class, 'rules'])->name('rules');
 Route::get('/abouts', [HomeController::class, 'about'])->name('about');
+Route::get('/jadwal', [ScheduleController::class, 'index'])->name('jadwal.index');
+
+
+
 
 Route::prefix('user')->middleware(['auth', 'checkrole:user'])->group(function () {
     Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('user.dashboard');
     Route::get('/history', [UserDashboardController::class, 'history'])->name('user.history');
     Route::get('/profile', [UserDashboardController::class, 'profile'])->name('user.profile');
     Route::put('/edit-profile/{id}', [UserDashboardController::class, 'edit_profile'])->name('user.edit.profile');
+
+    Route::post('/schedule', [BookingController::class, 'schedule']);
+    Route::get('/cart', [BookingController::class, 'viewCart'])->name('user.cart');
+    Route::post('/booking/submit/{id}', [BookingController::class, 'submitBooking'])->name('booking.submit');
+
+    Route::post('/add-to-cart', [BookingController::class, 'addToCart'])->name('user.add.cart');
+    Route::post('/remove-from-cart', [BookingController::class, 'removeFromCart'])->name('user.remove.cart');
+    Route::get('/cart/count', 'DashboardController@getCartCount')->name('user.cart.count');
 });
 
 Route::prefix('admin')->middleware(['auth', 'checkrole:admin'])->group(function () {
@@ -77,14 +92,8 @@ Route::prefix('admin')->middleware(['auth', 'checkrole:admin'])->group(function 
 
     Route::get('/gallery/{title}', [GalleryController::class, 'index'])->name('gallery.index');
     Route::post('/gallery/process', [GalleryController::class, 'store'])->name('gallery.process');
+
+    Route::get('/booking', [DetailBookingController::class, 'index'])->name('booking.index');
+    Route::get('/booking/{id}', [DetailBookingController::class, 'show'])->name('booking.show');
+    Route::delete('/booking/delete/{id}', [DetailBookingController::class, 'destroy'])->name('booking.destroy');
 });
-
-Route::get('/book',[BookController::class,'index'])->name('book.index');
-
-Route::get('/book/create',[BookController::class,'create'])->name('book.create');
-
-Route::post('/book/create/process',[BookController::class,'store'])->name('book.store');
-
-Route::get('/book/{id}',[BookController::class,'show'])->name('book.show');
-
-Route::get('/book/edit',[BookController::class,'edit'])->name('book.edit');

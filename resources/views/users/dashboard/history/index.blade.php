@@ -8,19 +8,20 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>ID</th>
+                <th>No</th>
                 <th>Nama Lapangan</th>
                 <th>Status Pembayaran</th>
-                <th>Action</th>
             </tr>
         </thead>
         <tbody>
+            @foreach ($bookings as $booking )
+                
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $booking->lapangan->title }}</td>
+                <td>Sudah Dibayar</td>
             </tr>
+            @endforeach
         </tbody>
     </table>
 @endsection

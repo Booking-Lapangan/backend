@@ -23,8 +23,8 @@
             <i class="far fa-square"></i> 
             <span>Rules</span></a>
             <li class="menu-header">Big Data</li>
-        <li  class="{{Route::is('') ? 'active' : ''}}" id="menu-booking" class="sidebar-item">
-          <a class="nav-link" href="#">
+        <li  class="{{Route::is('booking') ? 'active' : ''}}" id="menu-booking" class="sidebar-item">
+          <a class="nav-link" href="{{route('booking.index')}}">
             <i class="far fa-square"></i> 
             <span>Booking</span></a>
         </li>

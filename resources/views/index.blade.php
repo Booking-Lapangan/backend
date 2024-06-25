@@ -36,6 +36,7 @@
           </div>
           <!-- End Card 1 -->
           @endforeach
+        </div>
       </div>
 
       <!-- Why Choose Us Section -->

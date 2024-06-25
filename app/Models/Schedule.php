@@ -10,7 +10,10 @@ class Schedule extends Model
     use HasFactory;
 
     protected $fillable = [
-        'lapangan_id', 'date', 'hour', 'status'
+        'lapangan_id',
+        'date',
+        'hour',
+        'status'
     ];
 
     public function lapangan()

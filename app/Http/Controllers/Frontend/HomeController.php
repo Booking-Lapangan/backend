@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Gallery;
 use App\Models\Lapangan;
 use App\Models\Rules;
-use App\Models\RulesCategory;
-use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -48,4 +46,6 @@ class HomeController extends Controller
     {
         return view('users.about');
     }
+
+    
 }

@@ -45,7 +45,7 @@
                                         </td>
                                         <td>
                                             <div class="btn-group" role="group">
-                                                <a href="{{ route('lapangan.show', $item->id) }}" class="btn btn-primary">Show</a>
+                                                <a href="{{ route('lapangan.show', $item->id) }}" class="btn btn-primary">Detail</a>
                                             </div>
                                                 <a href="{{ route('lapangan.edit', $item->id) }}" class="btn btn-warning">Edit</a>
                                             <form action="{{ route('lapangan.destroy', $item->id) }}" method="POST" class="d-inline">

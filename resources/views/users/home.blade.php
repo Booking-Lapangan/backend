@@ -30,7 +30,7 @@
               <div class="card-body">
                 <h5 class="card-title fw-bold">{{$item->title}}</h5>
                 <p class="card-text">Rp. {{$item->price}}</p>
-                <a href="{{route('lapangan',$item->title)}}" class="btn btn-primary">Lihat Jadwal</a>
+                <a href="{{ route('jadwal.index', ['date' => date('Y-m-d'), 'lapangan_id=' => $item->lapangan_id]) }}" class="btn btn-primary">Lihat Jadwal</a>
               </div>
             </div>
           </div>

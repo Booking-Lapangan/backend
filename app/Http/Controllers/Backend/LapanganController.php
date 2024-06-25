@@ -69,7 +69,7 @@ class LapanganController extends Controller
         for ($date = $startDate; $date->lte($endDate); $date->addDay()) {
             for ($hour = 0; $hour < 24; $hour++) {
                 // Misalnya, kita hanya buat jadwal pada jam-jam tertentu (boleh disesuaikan)
-                if ($hour >= 8 && $hour <= 20) {
+                if ($hour >= 9 && $hour <= 20) {
                     Schedule::create([
                         'lapangan_id' => $lapangan->id,
                         'date' => $date->toDateString(),
