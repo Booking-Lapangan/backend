@@ -139,7 +139,7 @@ class BookingController extends Controller
         ]);
 
         // Cari booking berdasarkan $bookingId
-        $booking = Booking::findOrFail($bookingId);
+        $booking = Booking::findOrFail($bookingId)->first();
 
         // Buat detail booking baru
         $detailBooking = new DetailBooking();
