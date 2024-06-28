@@ -14,11 +14,11 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($bookings as $booking )
+            @foreach ($booking as $bookings )
                 
             <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $booking->lapangan->title }}</td>
+                <td>{{ $bookings->lapangan->title }}</td>
                 <td>Sudah Dibayar</td>
             </tr>
             @endforeach

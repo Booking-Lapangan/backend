@@ -136,7 +136,7 @@ class BookingController extends Controller
         ]);
 
         // Cari booking berdasarkan $bookingId
-        $booking = Booking::findOrFail($bookingId);
+        $booking = Booking::findOrFail($bookingId)->first();
 
         // Buat detail booking baru
         $detailBooking = new DetailBooking();
@@ -148,6 +148,6 @@ class BookingController extends Controller
         $detailBooking->save();
 
         // Redirect atau return response sesuai kebutuhan aplikasi
-        return view('users.dashboard.history.index');
+        return view('users.dashboard.history.index', compact('booking'));
     }
 }
