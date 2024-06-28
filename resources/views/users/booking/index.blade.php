@@ -39,9 +39,7 @@
                 </div>
             </div>
         @endfor
-    </div>
-
-    <button class="btn btn-primary mt-4" id="proceedPayment">Lanjutkan Pembayaran</button>
+    </div> 
 </div>
 
 <script>

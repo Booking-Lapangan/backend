@@ -19,34 +19,37 @@ class BookingController extends Controller
 
     public function addToCart(Request $request)
     {
-        // Validasi request
+        // Validate request
         $request->validate([
             'hour' => 'required|integer',
             'date' => 'required|date',
             'lapangan_id' => 'required|exists:lapangans,id',
         ]);
 
-        // Cari jadwal yang sesuai berdasarkan jam, tanggal, dan lapangan
+        // Find the schedule based on hour, date, and lapangan
         $schedule = Schedule::where('lapangan_id', $request->lapangan_id)
             ->whereDate('date', $request->date)
             ->where('hour', $request->hour)
             ->first();
 
-        // Jika jadwal ditemukan, ubah statusnya menjadi 'Booked'
+        // If the schedule is found, change its status to 'booked'
         if ($schedule) {
             $schedule->status = 'booked';
             $schedule->save();
+
+            // Create a new booking with the found schedule's ID
+            $book = new Booking();
+            $book->user_id = Auth::id();
+            $book->lapangan_id = $request->lapangan_id;
+            $book->schedule_id = $schedule->id; // Assign the schedule ID
+            $book->date = $request->date;
+            $book->status = 'booked';
+            $book->save();
+
+            return response()->json(['success' => true]);
         }
 
-        $book = new Booking();
-        $book->user_id = Auth::id();
-        $book->lapangan_id = $request->input('lapangan_id');
-        $book->schedule_id = $request->input('hour');
-        $book->date = $request->input('date');
-        $book->status = 'booked';
-        $book->save();
-
-        return response()->json(['success' => true]);
+        return response()->json(['success' => false, 'message' => 'Schedule not found'], 404);
     }
 
     public function removeFromCart(Request $request)
@@ -72,7 +75,7 @@ class BookingController extends Controller
 
         $book = Booking::where('user_id', Auth::id())
             ->where('lapangan_id', $request->input('lapangan_id'))
-            ->where('schedule_id', $request->input('hour'))
+            ->where('schedule_id', $schedule->id)
             ->where('date', $request->input('date'))
             ->first();
 
@@ -147,19 +150,6 @@ class BookingController extends Controller
         $detailBooking->note = $request->note;
         $detailBooking->save();
 
-        $bookings = Booking::with(['lapangan', 'schedule'])->get();
-
-        $groupedBookings = $bookings->groupBy(function ($item, $key) {
-            return $item->schedule->date;
-        });
-
-        foreach ($bookings as $booking) {
-            $startHour = $booking->schedule->hour;
-            $endHour = $startHour + 1;
-            $booking->schedule->formatted_time = sprintf('%02d:00 - %02d:00', $startHour, $endHour);
-        }
-
-        // Redirect atau return response sesuai kebutuhan aplikasi
-        return view('users.dashboard.history.index', compact('groupedBookings', 'bookings'));
+        return view('users.dashboard.dashboard');
     }
 }
