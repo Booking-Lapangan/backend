@@ -17,11 +17,19 @@ class DashboardController extends Controller
 
     public function history()
     {
-        $user = Auth::user();
-        $bookings = Booking::where('user_id', $user->id)
-            ->with('lapangan')
-            ->get();
-        return view('users.dashboard.history.index', compact('user', 'bookings'));
+        $bookings = Booking::with(['lapangan', 'schedule'])->get();
+
+        $groupedBookings = $bookings->groupBy(function ($item, $key) {
+            return $item->schedule->date; 
+        });
+
+        foreach ($bookings as $booking) {
+            $startHour = $booking->schedule->hour;
+            $endHour = $startHour + 1;
+            $booking->schedule->formatted_time = sprintf('%02d:00 - %02d:00', $startHour, $endHour);
+        }
+
+        return view('users.dashboard.history.index', compact('groupedBookings', 'bookings'));
     }
 
     public function profile()

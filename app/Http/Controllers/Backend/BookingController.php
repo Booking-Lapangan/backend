@@ -147,7 +147,19 @@ class BookingController extends Controller
         $detailBooking->note = $request->note;
         $detailBooking->save();
 
+        $bookings = Booking::with(['lapangan', 'schedule'])->get();
+
+        $groupedBookings = $bookings->groupBy(function ($item, $key) {
+            return $item->schedule->date;
+        });
+
+        foreach ($bookings as $booking) {
+            $startHour = $booking->schedule->hour;
+            $endHour = $startHour + 1;
+            $booking->schedule->formatted_time = sprintf('%02d:00 - %02d:00', $startHour, $endHour);
+        }
+
         // Redirect atau return response sesuai kebutuhan aplikasi
-        return view('users.dashboard.history.index', compact('booking'));
+        return view('users.dashboard.history.index', compact('groupedBookings', 'bookings'));
     }
 }
