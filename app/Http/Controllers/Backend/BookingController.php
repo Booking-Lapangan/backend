@@ -19,29 +19,29 @@ class BookingController extends Controller
 
     public function addToCart(Request $request)
     {
-        // Validate request
+
         $request->validate([
             'hour' => 'required|integer',
             'date' => 'required|date',
             'lapangan_id' => 'required|exists:lapangans,id',
         ]);
 
-        // Find the schedule based on hour, date, and lapangan
+
         $schedule = Schedule::where('lapangan_id', $request->lapangan_id)
             ->whereDate('date', $request->date)
             ->where('hour', $request->hour)
             ->first();
 
-        // If the schedule is found, change its status to 'booked'
+
         if ($schedule) {
             $schedule->status = 'booked';
             $schedule->save();
 
-            // Create a new booking with the found schedule's ID
+
             $book = new Booking();
             $book->user_id = Auth::id();
             $book->lapangan_id = $request->lapangan_id;
-            $book->schedule_id = $schedule->id; // Assign the schedule ID
+            $book->schedule_id = $schedule->id;
             $book->date = $request->date;
             $book->status = 'booked';
             $book->save();
